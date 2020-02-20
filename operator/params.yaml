@@ -1,6 +1,11 @@
 apiVersion: kudo.dev/v1beta1
 parameters:
-  - name: replicas
+  - name: NODE_COUNT
     description: Number of replicas that should be run as part of the deployment
-    default: 1
+    default: 3
+    displayName: "Node Count"
+  - name: STORAGE_CLASS
+    description: "The storage class to be used in volumeClaimTemplates. By default its not required and the default storage class is used."
+    required: false
+    trigger: "not-allowed"
 
