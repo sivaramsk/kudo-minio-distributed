@@ -25,7 +25,7 @@ spec:
         image: {{ .Params.NODE_DOCKER_IMAGE }}
         args:
         - server
-        - http://minio-{0...{{ .Params.NODE_COUNT }}}.minio.default.svc.cluster.local/data
+        - http://minio-{0...{{ sub (atoi .Params.NODE_COUNT) 1 }}}.minio.default.svc.cluster.local/data
         ports:
         - containerPort: {{ .Params.MINIO_CONTAINER_PORT }}
         # These volume mounts are persistent. Each pod in the PetSet
