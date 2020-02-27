@@ -4,8 +4,68 @@ parameters:
     description: Number of replicas that should be run as part of the deployment
     default: 4
     displayName: "Node Count"
-  - name: STORAGE_CLASS
-    description: "The storage class to be used in volumeClaimTemplates. By default its not required and the default storage class is used."
+
+  - name: NODE_CPU_MC
+    description: "CPU request (in millicores) for the minio node containers."
+    default: "1000"
+
+  - name: NODE_CPU_LIMIT_MC
+    description: "CPU limit (in millicores) for the minio node containers."
+    default: "1000"
+
+  - name: NODE_MEM_MIB
+    description: "Memory request (in MiB) for the minio node containers."
+    default: "4096"
+
+  - name: NODE_MEM_LIMIT_MIB
+    description: "Memory limit (in MiB) for the minio node containers."
+    default: "4096"
+
+  - name: NODE_DISK_SIZE_GIB
+    description: "Disk size (in GiB) for the minio node containers."
+    default: "20"
+
+  - name: NODE_STORAGE_CLASS
+    description: "The storage class to be used in volumeClaimTemplates. By default, it is not required and the default storage class is used."
     required: false
     trigger: "not-allowed"
 
+  - name: NODE_DOCKER_IMAGE
+    description: "Minio node Docker image."
+    default: "minio/minio:RELEASE.2020-02-20T22-51-23Z"
+
+  - name: NODE_DOCKER_IMAGE_PULL_POLICY
+    description: "Minio node Docker image pull policy."
+    default: "Always"
+
+  - name: MINIO_CONTAINER_PORT
+    description: "Container port for the minio."
+    default: 9000
+
+  - name: MINIO_MOUNT_PATH
+    description: "Storage Mount path for minio."
+    default: "/data"
+
+  - name: MINIO_LIVENESS_PROBE_PATH
+    description: "Minio liveness probe path."
+    default: "/minio/health/live"
+
+  - name: MINIO_LIVENESS_PROBE_INITIAL_DELAY_SECONDS
+    description: "Minio liveness probe delay"
+    default: 120
+
+  - name: MINIO_LIVENESS_PROBE_PERIOD_SECONDS
+    description: "Minio liveness probe period seconds."
+    default: 20
+   
+  - name: MINIO_READYNESS_PROBE_PATH
+    description: "Minio readyness probe path."
+    default: "/minio/health/ready"
+
+  - name: MINIO_READYNESS_PROBE_INITIAL_DELAY_SECONDS
+    description: "Minio readyness probe delay"
+    default: 120
+
+  - name: MINIO_READYNESS_PROBE_PERIOD_SECONDS
+    description: "Minio readyness probe period seconds."
+    default: 20
